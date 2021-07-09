@@ -89,8 +89,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-@OS_WIN32_TRUE@am__append_1 = -export-symbols $(srcdir)/fribidi.def
-@OS_WIN32_FALSE@am__append_2 = -export-symbols-regex "^fribidi_.*"
+@OS_WIN32_FALSE@am__append_1 = -export-symbols-regex "^fribidi_.*"
 subdir = lib
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
@@ -136,14 +135,22 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgincludedir)" \
 	"$(DESTDIR)$(pkgincludedir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
-am_libfribidi_la_OBJECTS = fribidi.lo fribidi-arabic.lo \
-	fribidi-bidi.lo fribidi-bidi-types.lo fribidi-char-sets.lo \
-	fribidi-char-sets-cap-rtl.lo fribidi-char-sets-cp1255.lo \
-	fribidi-char-sets-cp1256.lo fribidi-char-sets-iso8859-6.lo \
-	fribidi-char-sets-iso8859-8.lo fribidi-char-sets-utf8.lo \
-	fribidi-deprecated.lo fribidi-joining.lo \
-	fribidi-joining-types.lo fribidi-mirroring.lo \
-	fribidi-brackets.lo fribidi-run.lo fribidi-shape.lo
+am_libfribidi_la_OBJECTS = libfribidi_la-fribidi.lo \
+	libfribidi_la-fribidi-arabic.lo libfribidi_la-fribidi-bidi.lo \
+	libfribidi_la-fribidi-bidi-types.lo \
+	libfribidi_la-fribidi-char-sets.lo \
+	libfribidi_la-fribidi-char-sets-cap-rtl.lo \
+	libfribidi_la-fribidi-char-sets-cp1255.lo \
+	libfribidi_la-fribidi-char-sets-cp1256.lo \
+	libfribidi_la-fribidi-char-sets-iso8859-6.lo \
+	libfribidi_la-fribidi-char-sets-iso8859-8.lo \
+	libfribidi_la-fribidi-char-sets-utf8.lo \
+	libfribidi_la-fribidi-deprecated.lo \
+	libfribidi_la-fribidi-joining.lo \
+	libfribidi_la-fribidi-joining-types.lo \
+	libfribidi_la-fribidi-mirroring.lo \
+	libfribidi_la-fribidi-brackets.lo libfribidi_la-fribidi-run.lo \
+	libfribidi_la-fribidi-shape.lo
 libfribidi_la_OBJECTS = $(am_libfribidi_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -167,21 +174,24 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/fribidi-arabic.Plo \
-	./$(DEPDIR)/fribidi-bidi-types.Plo \
-	./$(DEPDIR)/fribidi-bidi.Plo ./$(DEPDIR)/fribidi-brackets.Plo \
-	./$(DEPDIR)/fribidi-char-sets-cap-rtl.Plo \
-	./$(DEPDIR)/fribidi-char-sets-cp1255.Plo \
-	./$(DEPDIR)/fribidi-char-sets-cp1256.Plo \
-	./$(DEPDIR)/fribidi-char-sets-iso8859-6.Plo \
-	./$(DEPDIR)/fribidi-char-sets-iso8859-8.Plo \
-	./$(DEPDIR)/fribidi-char-sets-utf8.Plo \
-	./$(DEPDIR)/fribidi-char-sets.Plo \
-	./$(DEPDIR)/fribidi-deprecated.Plo \
-	./$(DEPDIR)/fribidi-joining-types.Plo \
-	./$(DEPDIR)/fribidi-joining.Plo \
-	./$(DEPDIR)/fribidi-mirroring.Plo ./$(DEPDIR)/fribidi-run.Plo \
-	./$(DEPDIR)/fribidi-shape.Plo ./$(DEPDIR)/fribidi.Plo
+am__depfiles_remade = ./$(DEPDIR)/libfribidi_la-fribidi-arabic.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-bidi-types.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-bidi.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-brackets.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-char-sets-cap-rtl.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-char-sets-cp1255.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-char-sets-cp1256.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-char-sets-iso8859-6.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-char-sets-iso8859-8.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-char-sets-utf8.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-char-sets.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-deprecated.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-joining-types.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-joining.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-mirroring.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-run.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi-shape.Plo \
+	./$(DEPDIR)/libfribidi_la-fribidi.Plo
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -263,6 +273,7 @@ EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 FRIBIDI_BINARY_AGE = @FRIBIDI_BINARY_AGE@
+FRIBIDI_CPPFLAGS = @FRIBIDI_CPPFLAGS@
 FRIBIDI_INTERFACE_AGE = @FRIBIDI_INTERFACE_AGE@
 FRIBIDI_INTERFACE_VERSION = @FRIBIDI_INTERFACE_VERSION@
 FRIBIDI_MAJOR_VERSION = @FRIBIDI_MAJOR_VERSION@
@@ -372,7 +383,7 @@ EXTRA_DIST = fribidi.def
 lib_LTLIBRARIES = libfribidi.la
 AM_CPPFLAGS = 
 libfribidi_la_LDFLAGS = -no-undefined -version-info $(LT_VERSION_INFO) \
-	$(am__append_1) $(am__append_2)
+	$(am__append_1)
 libfribidi_la_LIBADD = 
 libfribidi_la_DEPENDENCIES = 
 libfribidi_la_headers = \
@@ -440,6 +451,7 @@ libfribidi_la_SOURCES = \
 		brackets-type.tab.i \
 		run.h
 
+libfribidi_la_CPPFLAGS = @FRIBIDI_CPPFLAGS@ -DFRIBIDI_BUILD
 GENERATEDSOURCES = \
 		fribidi-unicode-version.h \
 		arabic-shaping.tab.i \
@@ -536,24 +548,24 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-arabic.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-bidi-types.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-bidi.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-brackets.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-char-sets-cap-rtl.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-char-sets-cp1255.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-char-sets-cp1256.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-char-sets-iso8859-6.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-char-sets-iso8859-8.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-char-sets-utf8.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-char-sets.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-deprecated.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-joining-types.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-joining.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-mirroring.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-run.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi-shape.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fribidi.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-arabic.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-bidi-types.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-bidi.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-brackets.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-char-sets-cap-rtl.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-char-sets-cp1255.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-char-sets-cp1256.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-char-sets-iso8859-6.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-char-sets-iso8859-8.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-char-sets-utf8.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-char-sets.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-deprecated.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-joining-types.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-joining.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-mirroring.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-run.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi-shape.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libfribidi_la-fribidi.Plo@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -581,6 +593,132 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+
+libfribidi_la-fribidi.lo: fribidi.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi.Tpo -c -o libfribidi_la-fribidi.lo `test -f 'fribidi.c' || echo '$(srcdir)/'`fribidi.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi.Tpo $(DEPDIR)/libfribidi_la-fribidi.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi.c' object='libfribidi_la-fribidi.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi.lo `test -f 'fribidi.c' || echo '$(srcdir)/'`fribidi.c
+
+libfribidi_la-fribidi-arabic.lo: fribidi-arabic.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-arabic.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-arabic.Tpo -c -o libfribidi_la-fribidi-arabic.lo `test -f 'fribidi-arabic.c' || echo '$(srcdir)/'`fribidi-arabic.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-arabic.Tpo $(DEPDIR)/libfribidi_la-fribidi-arabic.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-arabic.c' object='libfribidi_la-fribidi-arabic.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-arabic.lo `test -f 'fribidi-arabic.c' || echo '$(srcdir)/'`fribidi-arabic.c
+
+libfribidi_la-fribidi-bidi.lo: fribidi-bidi.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-bidi.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-bidi.Tpo -c -o libfribidi_la-fribidi-bidi.lo `test -f 'fribidi-bidi.c' || echo '$(srcdir)/'`fribidi-bidi.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-bidi.Tpo $(DEPDIR)/libfribidi_la-fribidi-bidi.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-bidi.c' object='libfribidi_la-fribidi-bidi.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-bidi.lo `test -f 'fribidi-bidi.c' || echo '$(srcdir)/'`fribidi-bidi.c
+
+libfribidi_la-fribidi-bidi-types.lo: fribidi-bidi-types.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-bidi-types.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-bidi-types.Tpo -c -o libfribidi_la-fribidi-bidi-types.lo `test -f 'fribidi-bidi-types.c' || echo '$(srcdir)/'`fribidi-bidi-types.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-bidi-types.Tpo $(DEPDIR)/libfribidi_la-fribidi-bidi-types.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-bidi-types.c' object='libfribidi_la-fribidi-bidi-types.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-bidi-types.lo `test -f 'fribidi-bidi-types.c' || echo '$(srcdir)/'`fribidi-bidi-types.c
+
+libfribidi_la-fribidi-char-sets.lo: fribidi-char-sets.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-char-sets.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-char-sets.Tpo -c -o libfribidi_la-fribidi-char-sets.lo `test -f 'fribidi-char-sets.c' || echo '$(srcdir)/'`fribidi-char-sets.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-char-sets.Tpo $(DEPDIR)/libfribidi_la-fribidi-char-sets.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-char-sets.c' object='libfribidi_la-fribidi-char-sets.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-char-sets.lo `test -f 'fribidi-char-sets.c' || echo '$(srcdir)/'`fribidi-char-sets.c
+
+libfribidi_la-fribidi-char-sets-cap-rtl.lo: fribidi-char-sets-cap-rtl.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-char-sets-cap-rtl.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-char-sets-cap-rtl.Tpo -c -o libfribidi_la-fribidi-char-sets-cap-rtl.lo `test -f 'fribidi-char-sets-cap-rtl.c' || echo '$(srcdir)/'`fribidi-char-sets-cap-rtl.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-char-sets-cap-rtl.Tpo $(DEPDIR)/libfribidi_la-fribidi-char-sets-cap-rtl.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-char-sets-cap-rtl.c' object='libfribidi_la-fribidi-char-sets-cap-rtl.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-char-sets-cap-rtl.lo `test -f 'fribidi-char-sets-cap-rtl.c' || echo '$(srcdir)/'`fribidi-char-sets-cap-rtl.c
+
+libfribidi_la-fribidi-char-sets-cp1255.lo: fribidi-char-sets-cp1255.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-char-sets-cp1255.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-char-sets-cp1255.Tpo -c -o libfribidi_la-fribidi-char-sets-cp1255.lo `test -f 'fribidi-char-sets-cp1255.c' || echo '$(srcdir)/'`fribidi-char-sets-cp1255.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-char-sets-cp1255.Tpo $(DEPDIR)/libfribidi_la-fribidi-char-sets-cp1255.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-char-sets-cp1255.c' object='libfribidi_la-fribidi-char-sets-cp1255.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-char-sets-cp1255.lo `test -f 'fribidi-char-sets-cp1255.c' || echo '$(srcdir)/'`fribidi-char-sets-cp1255.c
+
+libfribidi_la-fribidi-char-sets-cp1256.lo: fribidi-char-sets-cp1256.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-char-sets-cp1256.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-char-sets-cp1256.Tpo -c -o libfribidi_la-fribidi-char-sets-cp1256.lo `test -f 'fribidi-char-sets-cp1256.c' || echo '$(srcdir)/'`fribidi-char-sets-cp1256.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-char-sets-cp1256.Tpo $(DEPDIR)/libfribidi_la-fribidi-char-sets-cp1256.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-char-sets-cp1256.c' object='libfribidi_la-fribidi-char-sets-cp1256.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-char-sets-cp1256.lo `test -f 'fribidi-char-sets-cp1256.c' || echo '$(srcdir)/'`fribidi-char-sets-cp1256.c
+
+libfribidi_la-fribidi-char-sets-iso8859-6.lo: fribidi-char-sets-iso8859-6.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-char-sets-iso8859-6.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-char-sets-iso8859-6.Tpo -c -o libfribidi_la-fribidi-char-sets-iso8859-6.lo `test -f 'fribidi-char-sets-iso8859-6.c' || echo '$(srcdir)/'`fribidi-char-sets-iso8859-6.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-char-sets-iso8859-6.Tpo $(DEPDIR)/libfribidi_la-fribidi-char-sets-iso8859-6.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-char-sets-iso8859-6.c' object='libfribidi_la-fribidi-char-sets-iso8859-6.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-char-sets-iso8859-6.lo `test -f 'fribidi-char-sets-iso8859-6.c' || echo '$(srcdir)/'`fribidi-char-sets-iso8859-6.c
+
+libfribidi_la-fribidi-char-sets-iso8859-8.lo: fribidi-char-sets-iso8859-8.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-char-sets-iso8859-8.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-char-sets-iso8859-8.Tpo -c -o libfribidi_la-fribidi-char-sets-iso8859-8.lo `test -f 'fribidi-char-sets-iso8859-8.c' || echo '$(srcdir)/'`fribidi-char-sets-iso8859-8.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-char-sets-iso8859-8.Tpo $(DEPDIR)/libfribidi_la-fribidi-char-sets-iso8859-8.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-char-sets-iso8859-8.c' object='libfribidi_la-fribidi-char-sets-iso8859-8.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-char-sets-iso8859-8.lo `test -f 'fribidi-char-sets-iso8859-8.c' || echo '$(srcdir)/'`fribidi-char-sets-iso8859-8.c
+
+libfribidi_la-fribidi-char-sets-utf8.lo: fribidi-char-sets-utf8.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-char-sets-utf8.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-char-sets-utf8.Tpo -c -o libfribidi_la-fribidi-char-sets-utf8.lo `test -f 'fribidi-char-sets-utf8.c' || echo '$(srcdir)/'`fribidi-char-sets-utf8.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-char-sets-utf8.Tpo $(DEPDIR)/libfribidi_la-fribidi-char-sets-utf8.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-char-sets-utf8.c' object='libfribidi_la-fribidi-char-sets-utf8.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-char-sets-utf8.lo `test -f 'fribidi-char-sets-utf8.c' || echo '$(srcdir)/'`fribidi-char-sets-utf8.c
+
+libfribidi_la-fribidi-deprecated.lo: fribidi-deprecated.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-deprecated.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-deprecated.Tpo -c -o libfribidi_la-fribidi-deprecated.lo `test -f 'fribidi-deprecated.c' || echo '$(srcdir)/'`fribidi-deprecated.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-deprecated.Tpo $(DEPDIR)/libfribidi_la-fribidi-deprecated.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-deprecated.c' object='libfribidi_la-fribidi-deprecated.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-deprecated.lo `test -f 'fribidi-deprecated.c' || echo '$(srcdir)/'`fribidi-deprecated.c
+
+libfribidi_la-fribidi-joining.lo: fribidi-joining.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-joining.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-joining.Tpo -c -o libfribidi_la-fribidi-joining.lo `test -f 'fribidi-joining.c' || echo '$(srcdir)/'`fribidi-joining.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-joining.Tpo $(DEPDIR)/libfribidi_la-fribidi-joining.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-joining.c' object='libfribidi_la-fribidi-joining.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-joining.lo `test -f 'fribidi-joining.c' || echo '$(srcdir)/'`fribidi-joining.c
+
+libfribidi_la-fribidi-joining-types.lo: fribidi-joining-types.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-joining-types.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-joining-types.Tpo -c -o libfribidi_la-fribidi-joining-types.lo `test -f 'fribidi-joining-types.c' || echo '$(srcdir)/'`fribidi-joining-types.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-joining-types.Tpo $(DEPDIR)/libfribidi_la-fribidi-joining-types.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-joining-types.c' object='libfribidi_la-fribidi-joining-types.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-joining-types.lo `test -f 'fribidi-joining-types.c' || echo '$(srcdir)/'`fribidi-joining-types.c
+
+libfribidi_la-fribidi-mirroring.lo: fribidi-mirroring.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-mirroring.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-mirroring.Tpo -c -o libfribidi_la-fribidi-mirroring.lo `test -f 'fribidi-mirroring.c' || echo '$(srcdir)/'`fribidi-mirroring.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-mirroring.Tpo $(DEPDIR)/libfribidi_la-fribidi-mirroring.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-mirroring.c' object='libfribidi_la-fribidi-mirroring.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-mirroring.lo `test -f 'fribidi-mirroring.c' || echo '$(srcdir)/'`fribidi-mirroring.c
+
+libfribidi_la-fribidi-brackets.lo: fribidi-brackets.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-brackets.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-brackets.Tpo -c -o libfribidi_la-fribidi-brackets.lo `test -f 'fribidi-brackets.c' || echo '$(srcdir)/'`fribidi-brackets.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-brackets.Tpo $(DEPDIR)/libfribidi_la-fribidi-brackets.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-brackets.c' object='libfribidi_la-fribidi-brackets.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-brackets.lo `test -f 'fribidi-brackets.c' || echo '$(srcdir)/'`fribidi-brackets.c
+
+libfribidi_la-fribidi-run.lo: fribidi-run.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-run.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-run.Tpo -c -o libfribidi_la-fribidi-run.lo `test -f 'fribidi-run.c' || echo '$(srcdir)/'`fribidi-run.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-run.Tpo $(DEPDIR)/libfribidi_la-fribidi-run.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-run.c' object='libfribidi_la-fribidi-run.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-run.lo `test -f 'fribidi-run.c' || echo '$(srcdir)/'`fribidi-run.c
+
+libfribidi_la-fribidi-shape.lo: fribidi-shape.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libfribidi_la-fribidi-shape.lo -MD -MP -MF $(DEPDIR)/libfribidi_la-fribidi-shape.Tpo -c -o libfribidi_la-fribidi-shape.lo `test -f 'fribidi-shape.c' || echo '$(srcdir)/'`fribidi-shape.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libfribidi_la-fribidi-shape.Tpo $(DEPDIR)/libfribidi_la-fribidi-shape.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='fribidi-shape.c' object='libfribidi_la-fribidi-shape.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libfribidi_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libfribidi_la-fribidi-shape.lo `test -f 'fribidi-shape.c' || echo '$(srcdir)/'`fribidi-shape.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -762,24 +900,24 @@ clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
 	mostlyclean-am
 
 distclean: distclean-am
-		-rm -f ./$(DEPDIR)/fribidi-arabic.Plo
-	-rm -f ./$(DEPDIR)/fribidi-bidi-types.Plo
-	-rm -f ./$(DEPDIR)/fribidi-bidi.Plo
-	-rm -f ./$(DEPDIR)/fribidi-brackets.Plo
-	-rm -f ./$(DEPDIR)/fribidi-char-sets-cap-rtl.Plo
-	-rm -f ./$(DEPDIR)/fribidi-char-sets-cp1255.Plo
-	-rm -f ./$(DEPDIR)/fribidi-char-sets-cp1256.Plo
-	-rm -f ./$(DEPDIR)/fribidi-char-sets-iso8859-6.Plo
-	-rm -f ./$(DEPDIR)/fribidi-char-sets-iso8859-8.Plo
-	-rm -f ./$(DEPDIR)/fribidi-char-sets-utf8.Plo
-	-rm -f ./$(DEPDIR)/fribidi-char-sets.Plo
-	-rm -f ./$(DEPDIR)/fribidi-deprecated.Plo
-	-rm -f ./$(DEPDIR)/fribidi-joining-types.Plo
-	-rm -f ./$(DEPDIR)/fribidi-joining.Plo
-	-rm -f ./$(DEPDIR)/fribidi-mirroring.Plo
-	-rm -f ./$(DEPDIR)/fribidi-run.Plo
-	-rm -f ./$(DEPDIR)/fribidi-shape.Plo
-	-rm -f ./$(DEPDIR)/fribidi.Plo
+		-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-arabic.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-bidi-types.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-bidi.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-brackets.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-char-sets-cap-rtl.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-char-sets-cp1255.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-char-sets-cp1256.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-char-sets-iso8859-6.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-char-sets-iso8859-8.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-char-sets-utf8.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-char-sets.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-deprecated.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-joining-types.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-joining.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-mirroring.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-run.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-shape.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi.Plo
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -826,24 +964,24 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f ./$(DEPDIR)/fribidi-arabic.Plo
-	-rm -f ./$(DEPDIR)/fribidi-bidi-types.Plo
-	-rm -f ./$(DEPDIR)/fribidi-bidi.Plo
-	-rm -f ./$(DEPDIR)/fribidi-brackets.Plo
-	-rm -f ./$(DEPDIR)/fribidi-char-sets-cap-rtl.Plo
-	-rm -f ./$(DEPDIR)/fribidi-char-sets-cp1255.Plo
-	-rm -f ./$(DEPDIR)/fribidi-char-sets-cp1256.Plo
-	-rm -f ./$(DEPDIR)/fribidi-char-sets-iso8859-6.Plo
-	-rm -f ./$(DEPDIR)/fribidi-char-sets-iso8859-8.Plo
-	-rm -f ./$(DEPDIR)/fribidi-char-sets-utf8.Plo
-	-rm -f ./$(DEPDIR)/fribidi-char-sets.Plo
-	-rm -f ./$(DEPDIR)/fribidi-deprecated.Plo
-	-rm -f ./$(DEPDIR)/fribidi-joining-types.Plo
-	-rm -f ./$(DEPDIR)/fribidi-joining.Plo
-	-rm -f ./$(DEPDIR)/fribidi-mirroring.Plo
-	-rm -f ./$(DEPDIR)/fribidi-run.Plo
-	-rm -f ./$(DEPDIR)/fribidi-shape.Plo
-	-rm -f ./$(DEPDIR)/fribidi.Plo
+		-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-arabic.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-bidi-types.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-bidi.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-brackets.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-char-sets-cap-rtl.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-char-sets-cp1255.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-char-sets-cp1256.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-char-sets-iso8859-6.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-char-sets-iso8859-8.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-char-sets-utf8.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-char-sets.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-deprecated.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-joining-types.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-joining.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-mirroring.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-run.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi-shape.Plo
+	-rm -f ./$(DEPDIR)/libfribidi_la-fribidi.Plo
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

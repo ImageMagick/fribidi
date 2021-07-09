@@ -229,6 +229,7 @@ EGREP = @EGREP@
 EXEEXT = @EXEEXT@
 FGREP = @FGREP@
 FRIBIDI_BINARY_AGE = @FRIBIDI_BINARY_AGE@
+FRIBIDI_CPPFLAGS = @FRIBIDI_CPPFLAGS@
 FRIBIDI_INTERFACE_AGE = @FRIBIDI_INTERFACE_AGE@
 FRIBIDI_INTERFACE_VERSION = @FRIBIDI_INTERFACE_VERSION@
 FRIBIDI_MAJOR_VERSION = @FRIBIDI_MAJOR_VERSION@
@@ -338,6 +339,7 @@ getopt_SOURCES = getopt.c getopt1.c getopt_int.h getopt.h gettext.h
 fribidi_SOURCES = fribidi-main.c $(getopt_SOURCES)
 fribidi_benchmark_SOURCES = fribidi-benchmark.c $(getopt_SOURCES)
 AM_CPPFLAGS = \
+		@FRIBIDI_CPPFLAGS@ \
 		-I$(top_builddir)/lib \
 		-I$(top_srcdir)/lib
 
