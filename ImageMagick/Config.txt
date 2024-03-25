@@ -22,3 +22,6 @@ HAVE_WCHAR_H
 
 [DIRECTORIES]
 lib
+
+[INCLUDES]
+lib
