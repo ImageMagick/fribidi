@@ -1,3 +1,74 @@
+commit bfb0385ef862cd40af7d5d33648fbb4bfe8eee65
+Author: sid-wr <136314541+sid-wr@users.noreply.github.com>
+Date:   Wed Mar 20 23:33:41 2024 +0530
+
+    Update unicode character databases to v15.1.0.
+
+ gen.tab/unidata/ReadMe.txt      |  10 +-
+ gen.tab/unidata/UnicodeData.txt | 307
+ +++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 311 insertions(+), 6 deletions(-)
+
+commit e01a424c7cef4e805879ddcdc47f163f2a2f39dc
+Author: Dov Grobgeld <dov.grobgeld@gmail.com>
+Date:   Sun Mar 17 20:12:54 2024 +0200
+
+    Update unicode character databases to v15.1.0.
+
+ gen.tab/unidata/ArabicShaping.txt |  8 ++++----
+ gen.tab/unidata/BidiBrackets.txt  | 10 +++++-----
+ gen.tab/unidata/BidiMirroring.txt |  8 ++++----
+ 3 files changed, 13 insertions(+), 13 deletions(-)
+
+commit 3002ffea02581b514d70c56d972af12082c4e70c
+Author: Peng Wu <alexepico@gmail.com>
+Date:   Tue Mar 12 13:53:45 2024 +0800
+
+    Update test cases to Unicode 15.1
+
+ test/unicode-conformance/BidiCharacterTest.txt | 6 +++---
+ test/unicode-conformance/BidiTest.txt          | 6 +++---
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
+commit 5b9a242cbbb0cf27d20da9941667abfc63808c19
+Merge: b54871c 4fc34ed
+Author: Dov Grobgeld <dov.grobgeld@gmail.com>
+Date:   Sat Dec 9 08:30:49 2023 +0200
+
+    Merge pull request #199 from tp-m/meson-fix-with-bin-disabled
+
+    meson: fix build with -Dbin=false and -Dtests=true
+
+commit 4fc34ed77ee985c19acb818dee1ed27054ddd434
+Author: Tim-Philipp Müller <tim@centricular.com>
+Date:   Sun Jun 4 10:28:43 2023 +0100
+
+    meson: fix build with -Dbin=false and -Dtests=true
+
+    The fribidi binary is needed by the unit test setup, so
+    if tests are enabled we need to build it even if binaries
+    are disabled. We just won't install it in that case.
+
+    Fixes #198
+
+ bin/meson.build | 8 +++++++-
+ meson.build     | 2 +-
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+commit b54871c339dabb7434718da3fed2fa63320997e5
+Author: Dov Grobgeld <dov.grobgeld@gmail.com>
+Date:   Tue May 16 21:58:46 2023 +0300
+
+    Bumped version to 1.0.13
+
+    - The version change was done without source changes to allow updating
+      the tar release file, which was missing man pages. Issue #197.
+
+ NEWS         | 5 +++++
+ configure.ac | 2 +-
+ meson.build  | 2 +-
+ 3 files changed, 7 insertions(+), 2 deletions(-)
+
 commit 3c0045876eba692a75cf31ed2cc1d073aee77da2
 Merge: 394197c 799eb9c
 Author: خالد حسني (Khaled Hosny) <khaled@aliftype.com>
