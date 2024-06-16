@@ -1,3 +1,25 @@
+commit 2803ff176713a27d7edb57a24bc60c38a02182e9
+Author: Dov Grobgeld <dov.grobgeld@gmail.com>
+Date:   Fri Jun 7 08:02:00 2024 +0300
+
+    Bumped version to 1.0.15
+
+ NEWS         | 5 +++++
+ configure.ac | 2 +-
+ meson.build  | 2 +-
+ 3 files changed, 7 insertions(+), 2 deletions(-)
+
+commit bca04dc3cd3af85a9d9220c430737333634d622a
+Author: Dov Grobgeld <dov.grobgeld@gmail.com>
+Date:   Thu Apr 25 06:44:01 2024 +0300
+
+    Bumped version to 1.0.14
+
+ NEWS         | 5 +++++
+ configure.ac | 2 +-
+ meson.build  | 2 +-
+ 3 files changed, 7 insertions(+), 2 deletions(-)
+
 commit bfb0385ef862cd40af7d5d33648fbb4bfe8eee65
 Author: sid-wr <136314541+sid-wr@users.noreply.github.com>
 Date:   Wed Mar 20 23:33:41 2024 +0530
