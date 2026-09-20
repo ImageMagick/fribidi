@@ -156,7 +156,7 @@ read_unicode_data_txt_equivalence (
       const char *s = buf;
       char ce_string[256]; /* For parsing the equivalence */
       char *p = NULL;
-      int ce, in_tag;
+      int ce;
 
       l++;
 
@@ -166,7 +166,7 @@ read_unicode_data_txt_equivalence (
       if (s[0] == '#' || s[0] == '\0' || s[0] == '\n')
 	continue;
       /*  Field:       0 ; 1    ; 2    ; 3    ; 4    ; 5           */
-      i = sscanf (s, "%lx;%*[^;];%*[^;];%*[^;];%*[^;];%[^;]", &c, ce_string);
+      i = sscanf (s, "%lx;%*[^;];%*[^;];%*[^;];%*[^;];%255[^;]", &c, ce_string);
       if (c >= FRIBIDI_UNICODE_CHARS)
         {
           fprintf (stderr, "invalid input at line %ld: %s", l, s);
@@ -175,26 +175,33 @@ read_unicode_data_txt_equivalence (
       if (i==1)
         continue;
 
-      /* split and parse ce */
+      /* Parse the decomposition mapping (field 5).  UAX #9 BD16 pairs
+       * brackets using canonical equivalence only, so a compatibility
+       * decomposition -- the ones introduced by a "<tag>" prefix -- must
+       * not feed the bracket table.  Otherwise the fullwidth form U+FF08
+       * would be folded to its ASCII counterpart U+0028 and the two would
+       * wrongly pair with each other. */
       p = ce_string;
+      while (*p == ' ')
+        p++;
+      if (*p == '<')
+        continue;
+
       ce = -1;
-      in_tag = 0;
-      while(*p)
+      while (*p)
         {
-          if (*p==';')
+          if (*p == ';')
             break;
-          else if (*p=='<')
-            in_tag = 1;
-          else if (*p=='>')
-            in_tag = 0;
-          else if (!in_tag && isalnum(*p))
+          else if (isalnum (*p))
             {
               /* Assume we got a hexa decimal */
-              ce = strtol(p,NULL,16);
+              ce = strtol (p, NULL, 16);
               break;
             }
           p++;
         }
+      if (ce < 0)
+        continue;
 
       /* FIXME: We don't handle First..Last parts of UnicodeData.txt,
        * but it works, since all those are LTR. */
@@ -263,12 +270,17 @@ read_data (
   clear_tabs ();
 
   if (!(f = fopen (uni_datafile_name, "rt")))
-    die2 ("error: cannot open `%s' for reading", bracket_datafile_name);
+    die2 ("error: cannot open `%s' for reading", uni_datafile_name);
 
   if (!strcmp (uni_datafile_type, "UnicodeData.txt"))
     read_unicode_data_txt_equivalence (f);
   else
-    die2 ("error: unknown data-file-type %s", uni_datafile_type);
+    {
+      fclose (f);
+      die2 ("error: unknown data-file-type %s", uni_datafile_type);
+    }
+
+  fclose (f);
 
   fprintf (stderr, "Reading `%s'\n", bracket_datafile_name);
   if (!(f = fopen (bracket_datafile_name, "rt")))
@@ -277,7 +289,10 @@ read_data (
   if (!strcmp (bracket_datafile_type, "BidiBrackets.txt"))
     read_bidi_brackets_txt (f);
   else
-    die2 ("error: unknown data-file-type %s", bracket_datafile_type);
+    {
+      fclose (f);
+      die2 ("error: unknown data-file-type %s", bracket_datafile_type);
+    }
 
   fclose (f);
 }
