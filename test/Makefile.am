@@ -8,13 +8,17 @@ TESTS_ENVIRONMENT = \
 
 AM_TESTS_ENVIRONMENT = $(TESTS_ENVIRONMENT)
 
-TESTS = run.tests test-reorder-nsm
+TESTS = run.tests test-reorder-nsm test-par-direction test-isolate-chain test-debug-deep-levels test-charset-not-found
 
 check_SCRIPTS = run.tests
 
-check_PROGRAMS = test-reorder-nsm
+check_PROGRAMS = test-reorder-nsm test-par-direction test-isolate-chain test-debug-deep-levels test-charset-not-found
 
 test_reorder_nsm_SOURCES = test-reorder-nsm.c
+test_par_direction_SOURCES = test-par-direction.c
+test_isolate_chain_SOURCES = test-isolate-chain.c
+test_debug_deep_levels_SOURCES = test-debug-deep-levels.c
+test_charset_not_found_SOURCES = test-charset-not-found.c
 
 AM_CPPFLAGS = \
 		@FRIBIDI_CPPFLAGS@ \
@@ -42,21 +46,18 @@ EXTRA_DIST = \
 	run.tests \
 	$(TEST_DATAS)
 
-SUFFIXES: .reference .input
-
-.reference.input:
-	testcase="$@" && \
-	charset="`echo "$@" | sed 's/_[^_]*$$//;s/.*_//'`" && \
-	$(top_builddir)/bin/fribidi --test --charset "$$charset" "$<" > "$@" \
-	|| ($(RM) "$@"; false)
-
+# Regenerate the reference files from the inputs.  This is deliberately a
+# plain phony target and not a suffix rule: a rule that rebuilds the
+# distributed .input files makes "make dist" overwrite them whenever a
+# .reference happens to have a newer mtime.
 references:
-	for testcase in "$(srcdir)"/test_*.input; do \
-		test="`echo $$testcase \
-		  | sed 's/\.input$$/.reference/i; s|.*/||;'`" && \
-		$(MAKE) $(AM_MAKEFLAGS) "$(srcdir)/$$test" || \
-		exit 1; \
+	for input in "$(srcdir)"/test_*.input; do \
+		base="`echo "$$input" | sed 's|.*/||; s/\.input$$//'`" && \
+		charset="`echo "$$base" | sed 's/^test_//; s/_.*//'`" && \
+		$(top_builddir)/bin/fribidi --test --charset "$$charset" "$$input" \
+		  > "$(srcdir)/$$base.reference" || exit 1; \
 	done
 
+.PHONY: references
 
 -include $(top_srcdir)/git.mk

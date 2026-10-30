@@ -89,8 +89,13 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-TESTS = run.tests test-reorder-nsm$(EXEEXT)
-check_PROGRAMS = test-reorder-nsm$(EXEEXT)
+TESTS = run.tests test-reorder-nsm$(EXEEXT) \
+	test-par-direction$(EXEEXT) test-isolate-chain$(EXEEXT) \
+	test-debug-deep-levels$(EXEEXT) \
+	test-charset-not-found$(EXEEXT)
+check_PROGRAMS = test-reorder-nsm$(EXEEXT) test-par-direction$(EXEEXT) \
+	test-isolate-chain$(EXEEXT) test-debug-deep-levels$(EXEEXT) \
+	test-charset-not-found$(EXEEXT)
 subdir = test
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
@@ -105,14 +110,32 @@ mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-am_test_reorder_nsm_OBJECTS = test-reorder-nsm.$(OBJEXT)
-test_reorder_nsm_OBJECTS = $(am_test_reorder_nsm_OBJECTS)
-test_reorder_nsm_LDADD = $(LDADD)
-test_reorder_nsm_DEPENDENCIES = $(top_builddir)/lib/libfribidi.la
+am_test_charset_not_found_OBJECTS = test-charset-not-found.$(OBJEXT)
+test_charset_not_found_OBJECTS = $(am_test_charset_not_found_OBJECTS)
+test_charset_not_found_LDADD = $(LDADD)
+test_charset_not_found_DEPENDENCIES =  \
+	$(top_builddir)/lib/libfribidi.la
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
+am_test_debug_deep_levels_OBJECTS = test-debug-deep-levels.$(OBJEXT)
+test_debug_deep_levels_OBJECTS = $(am_test_debug_deep_levels_OBJECTS)
+test_debug_deep_levels_LDADD = $(LDADD)
+test_debug_deep_levels_DEPENDENCIES =  \
+	$(top_builddir)/lib/libfribidi.la
+am_test_isolate_chain_OBJECTS = test-isolate-chain.$(OBJEXT)
+test_isolate_chain_OBJECTS = $(am_test_isolate_chain_OBJECTS)
+test_isolate_chain_LDADD = $(LDADD)
+test_isolate_chain_DEPENDENCIES = $(top_builddir)/lib/libfribidi.la
+am_test_par_direction_OBJECTS = test-par-direction.$(OBJEXT)
+test_par_direction_OBJECTS = $(am_test_par_direction_OBJECTS)
+test_par_direction_LDADD = $(LDADD)
+test_par_direction_DEPENDENCIES = $(top_builddir)/lib/libfribidi.la
+am_test_reorder_nsm_OBJECTS = test-reorder-nsm.$(OBJEXT)
+test_reorder_nsm_OBJECTS = $(am_test_reorder_nsm_OBJECTS)
+test_reorder_nsm_LDADD = $(LDADD)
+test_reorder_nsm_DEPENDENCIES = $(top_builddir)/lib/libfribidi.la
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -128,7 +151,11 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/test-reorder-nsm.Po
+am__depfiles_remade = ./$(DEPDIR)/test-charset-not-found.Po \
+	./$(DEPDIR)/test-debug-deep-levels.Po \
+	./$(DEPDIR)/test-isolate-chain.Po \
+	./$(DEPDIR)/test-par-direction.Po \
+	./$(DEPDIR)/test-reorder-nsm.Po
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -148,8 +175,14 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(test_reorder_nsm_SOURCES)
-DIST_SOURCES = $(test_reorder_nsm_SOURCES)
+SOURCES = $(test_charset_not_found_SOURCES) \
+	$(test_debug_deep_levels_SOURCES) \
+	$(test_isolate_chain_SOURCES) $(test_par_direction_SOURCES) \
+	$(test_reorder_nsm_SOURCES)
+DIST_SOURCES = $(test_charset_not_found_SOURCES) \
+	$(test_debug_deep_levels_SOURCES) \
+	$(test_isolate_chain_SOURCES) $(test_par_direction_SOURCES) \
+	$(test_reorder_nsm_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
 	ctags-recursive dvi-recursive html-recursive info-recursive \
 	install-data-recursive install-dvi-recursive \
@@ -582,6 +615,10 @@ TESTS_ENVIRONMENT = \
 AM_TESTS_ENVIRONMENT = $(TESTS_ENVIRONMENT)
 check_SCRIPTS = run.tests
 test_reorder_nsm_SOURCES = test-reorder-nsm.c
+test_par_direction_SOURCES = test-par-direction.c
+test_isolate_chain_SOURCES = test-isolate-chain.c
+test_debug_deep_levels_SOURCES = test-debug-deep-levels.c
+test_charset_not_found_SOURCES = test-charset-not-found.c
 AM_CPPFLAGS = \
 		@FRIBIDI_CPPFLAGS@ \
 		-I$(top_builddir)/lib \
@@ -609,7 +646,7 @@ EXTRA_DIST = \
 all: all-recursive
 
 .SUFFIXES:
-.SUFFIXES: .c .input .lo .log .o .obj .reference .test .test$(EXEEXT) .trs
+.SUFFIXES: .c .lo .log .o .obj .test .test$(EXEEXT) .trs
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -644,6 +681,22 @@ clean-checkPROGRAMS:
 	$(am__rm_f) $(check_PROGRAMS)
 	test -z "$(EXEEXT)" || $(am__rm_f) $(check_PROGRAMS:$(EXEEXT)=)
 
+test-charset-not-found$(EXEEXT): $(test_charset_not_found_OBJECTS) $(test_charset_not_found_DEPENDENCIES) $(EXTRA_test_charset_not_found_DEPENDENCIES) 
+	@rm -f test-charset-not-found$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_charset_not_found_OBJECTS) $(test_charset_not_found_LDADD) $(LIBS)
+
+test-debug-deep-levels$(EXEEXT): $(test_debug_deep_levels_OBJECTS) $(test_debug_deep_levels_DEPENDENCIES) $(EXTRA_test_debug_deep_levels_DEPENDENCIES) 
+	@rm -f test-debug-deep-levels$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_debug_deep_levels_OBJECTS) $(test_debug_deep_levels_LDADD) $(LIBS)
+
+test-isolate-chain$(EXEEXT): $(test_isolate_chain_OBJECTS) $(test_isolate_chain_DEPENDENCIES) $(EXTRA_test_isolate_chain_DEPENDENCIES) 
+	@rm -f test-isolate-chain$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_isolate_chain_OBJECTS) $(test_isolate_chain_LDADD) $(LIBS)
+
+test-par-direction$(EXEEXT): $(test_par_direction_OBJECTS) $(test_par_direction_DEPENDENCIES) $(EXTRA_test_par_direction_DEPENDENCIES) 
+	@rm -f test-par-direction$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(test_par_direction_OBJECTS) $(test_par_direction_LDADD) $(LIBS)
+
 test-reorder-nsm$(EXEEXT): $(test_reorder_nsm_OBJECTS) $(test_reorder_nsm_DEPENDENCIES) $(EXTRA_test_reorder_nsm_DEPENDENCIES) 
 	@rm -f test-reorder-nsm$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(test_reorder_nsm_OBJECTS) $(test_reorder_nsm_LDADD) $(LIBS)
@@ -654,6 +707,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-charset-not-found.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-debug-deep-levels.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-isolate-chain.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-par-direction.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-reorder-nsm.Po@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
@@ -968,6 +1025,34 @@ test-reorder-nsm.log: test-reorder-nsm$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-par-direction.log: test-par-direction$(EXEEXT)
+	@p='test-par-direction$(EXEEXT)'; \
+	b='test-par-direction'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-isolate-chain.log: test-isolate-chain$(EXEEXT)
+	@p='test-isolate-chain$(EXEEXT)'; \
+	b='test-isolate-chain'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-debug-deep-levels.log: test-debug-deep-levels$(EXEEXT)
+	@p='test-debug-deep-levels$(EXEEXT)'; \
+	b='test-debug-deep-levels'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+test-charset-not-found.log: test-charset-not-found$(EXEEXT)
+	@p='test-charset-not-found$(EXEEXT)'; \
+	b='test-charset-not-found'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 .test.log:
 	@p='$<'; \
 	$(am__set_b); \
@@ -1087,6 +1172,10 @@ clean-am: clean-checkPROGRAMS clean-generic clean-libtool \
 	mostlyclean-am
 
 distclean: distclean-recursive
+	-rm -f ./$(DEPDIR)/test-charset-not-found.Po
+	-rm -f ./$(DEPDIR)/test-debug-deep-levels.Po
+	-rm -f ./$(DEPDIR)/test-isolate-chain.Po
+	-rm -f ./$(DEPDIR)/test-par-direction.Po
 	-rm -f ./$(DEPDIR)/test-reorder-nsm.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
@@ -1133,6 +1222,10 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-recursive
+	-rm -f ./$(DEPDIR)/test-charset-not-found.Po
+	-rm -f ./$(DEPDIR)/test-debug-deep-levels.Po
+	-rm -f ./$(DEPDIR)/test-isolate-chain.Po
+	-rm -f ./$(DEPDIR)/test-par-direction.Po
 	-rm -f ./$(DEPDIR)/test-reorder-nsm.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
@@ -1172,21 +1265,19 @@ uninstall-am:
 .PRECIOUS: Makefile
 
 
-SUFFIXES: .reference .input
-
-.reference.input:
-	testcase="$@" && \
-	charset="`echo "$@" | sed 's/_[^_]*$$//;s/.*_//'`" && \
-	$(top_builddir)/bin/fribidi --test --charset "$$charset" "$<" > "$@" \
-	|| ($(RM) "$@"; false)
-
+# Regenerate the reference files from the inputs.  This is deliberately a
+# plain phony target and not a suffix rule: a rule that rebuilds the
+# distributed .input files makes "make dist" overwrite them whenever a
+# .reference happens to have a newer mtime.
 references:
-	for testcase in "$(srcdir)"/test_*.input; do \
-		test="`echo $$testcase \
-		  | sed 's/\.input$$/.reference/i; s|.*/||;'`" && \
-		$(MAKE) $(AM_MAKEFLAGS) "$(srcdir)/$$test" || \
-		exit 1; \
+	for input in "$(srcdir)"/test_*.input; do \
+		base="`echo "$$input" | sed 's|.*/||; s/\.input$$//'`" && \
+		charset="`echo "$$base" | sed 's/^test_//; s/_.*//'`" && \
+		$(top_builddir)/bin/fribidi --test --charset "$$charset" "$$input" \
+		  > "$(srcdir)/$$base.reference" || exit 1; \
 	done
+
+.PHONY: references
 
 -include $(top_srcdir)/git.mk
 

@@ -29,10 +29,8 @@ if CROSS_COMPILING
 # host. Fall back to a man page shipped in the source tree (e.g. from a
 # release tarball) if there is one, otherwise skip generating it.
 %.1: %
-	@if test -f $(srcdir)/$@ && ! test $(srcdir)/$@ -ef $@; then \
+	@if test -f $(srcdir)/$@; then \
 	  cp $(srcdir)/$@ $@; \
-	elif test -f $(srcdir)/$@; then \
-	  : ; \
 	else \
 	  echo "$@: skipping man page generation; help2man can't run $< while cross-compiling" >&2; \
 	  : > $@; \

@@ -1,3 +1,187 @@
+commit b61c09be419e67ad0ab7811bddab65cc2cb22ee0
+Author: Dov Grobgeld <dov.grobgeld@gmail.com>
+Date:   Thu Oct 29 23:13:07 2026 +0200
+
+    Fix the non-security bugs from the OSS scanner report
+
+    - bidi: local_bracket_stack had its dimensions swapped, giving wrong
+      bracket pairing (ANT-2026-8V04RHZF).
+    - bidi: a full BD16 stack now stops pairing only for its own isolating
+      run sequence, and the stack is reset when a sequence starts
+      (ANT-2026-YIWCEVFV).
+    - bidi: don't carry bracket pairing state from one isolate into the
+      next sibling isolate (ANT-2026-2XBZK082).
+    - bidi: an overflow isolate is not a valid isolate (X5a-X5c), and X7
+      checks the overflow counts before the stack top (ANT-2026-DCIJ6HFH).
+    - bidi: debug level dump no longer reads past char_from_level_array
+      (ANT-2026-9ZU4LY2S).
+    - fribidi-caprtl2utf8: UTF-8 output no longer overflows the line buffer
+      (ANT-2026-68IW0EN5).
+    - fribidi_unicode_to_charset: NUL-terminate for an unknown charset
+      (ANT-2026-QKI78P14).
+
+    Adds CapRTL isolate test lines, test-debug-deep-levels and
+    test-charset-not-found.
+
+    Reported by Anthropic's OSS Scanner.
+
+    Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+ bin/fribidi-caprtl2utf8.c          |  11 ++--
+ lib/fribidi-bidi.c                 | 107
+ +++++++++++++++++++++++++------------
+ lib/fribidi-char-sets.c            |   6 ++-
+ test/Makefile.am                   |   6 ++-
+ test/meson.build                   |  12 +++++
+ test/test-charset-not-found.c      |  50 +++++++++++++++++
+ test/test-debug-deep-levels.c      |  71 ++++++++++++++++++++++++
+ test/test_CapRTL_isolate.input     |  10 ++++
+ test/test_CapRTL_isolate.reference |  10 ++++
+ 9 files changed, 243 insertions(+), 40 deletions(-)
+
+commit aa57457552950f4ad40d62379ddc33c43d7cfa47
+Author: Dov Grobgeld <dov.grobgeld@gmail.com>
+Date:   Thu Oct 29 23:07:40 2026 +0200
+
+    lib: fix findings from OSS scanner report
+
+    - fribidi_remove_bidi_marks: rebuild position maps from the kept
+      entries only and ignore out-of-range (-1) entries, fixing an
+      out-of-bounds write before the caller's map.
+      Discovered by Anthropic's OSS Scanner, as vulnerability
+      ANT-2026-0OR4AS4J.
+    - fribidi_cap_rtl_to_unicode: compare input as unsigned char so bytes
+      >= 0x80 map to '?' on unsigned-char ABIs instead of over-reading
+      the table.
+      Discovered by Anthropic's OSS Scanner, as vulnerability
+      ANT-2026-YY0KNE3C.
+    - Check the unchecked allocations in fribidi_reorder_line(),
+      fribidi_log2vis() (ar_props) and the bracket stack rows.
+      Discovered by Anthropic's OSS Scanner, as vulnerability
+      ANT-2026-TDC51TQN.
+    - Cache the forward adjacent-run search over chains of PDI runs, making
+      back-to-back isolates linear. Adds test-isolate-chain.
+      Discovered by Anthropic's OSS Scanner, as vulnerability
+      ANT-2026-1QOXAAEB.
+    - Record enclosed-strong flags per bracket pair during BD16 so N0b/N0c
+      no longer rescan the runs between each pair. Adds a fuzzing seed.
+      Discovered by Anthropic's OSS Scanner, as vulnerability
+      ANT-2026-XY4AFPYN.
+
+    Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+ lib/fribidi-bidi.c                                 | 149
+ +++++++++++++++------
+ lib/fribidi-char-sets-cap-rtl.c                    |   5 +-
+ lib/fribidi.c                                      |  12 +-
+ test/Makefile.am                                   |   5 +-
+ ...w-unit-127f5556f3c0145bd02da2c985a56e4a8baf0195 | Bin 0 -> 131072 bytes
+ test/meson.build                                   |   6 +
+ test/test-isolate-chain.c                          | 130
+ ++++++++++++++++++
+ 7 files changed, 258 insertions(+), 49 deletions(-)
+
+commit d2f3e1f4946e7cef9789e1c3ebdb4a60d4314c7f
+Author: Dov Grobgeld <dov.grobgeld@gmail.com>
+Date:   Thu Oct 15 21:31:49 2026 +0300
+
+    test: don't let make dist regenerate the .input files
+
+    The .reference.input suffix rule made `make distdir` rebuild a test's
+    .input from its .reference whenever the .reference had a newer mtime,
+    as can happen after a fresh checkout. That overwrote the distributed
+    inputs with fribidi's own --test output and made `make distcheck` fail
+    in run.tests.
+
+    Replace the suffix rule with a plain `references` target that
+    regenerates the .reference files from the .input files, which is what
+    the old target was meant to do.
+
+    Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+
+ test/Makefile.am | 23 ++++++++++-------------
+ 1 file changed, 10 insertions(+), 13 deletions(-)
+
+commit 1bc998e28538055a8ce7ebc920be69ef7816ad1d
+Author: vera-rubin <322284620+vera-rubin@users.noreply.github.com>
+Date:   Wed Oct 14 20:23:24 2026 +0000
+
+    lib: reset isolates at paragraph boundaries in direction scan
+
+ lib/fribidi-bidi.c        |  2 ++
+ test/Makefile.am          |  5 +++--
+ test/meson.build          |  6 ++++++
+ test/test-par-direction.c | 46
+ ++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 57 insertions(+), 2 deletions(-)
+
+commit 78854f85fbff6afe19d04714ac2fe42e2cdd09dc
+Author: Dov Grobgeld <dov.grobgeld@gmail.com>
+Date:   Wed Oct 14 21:53:06 2026 +0300
+
+    lib: fix integer overflow in run-pool allocation on 32-bit
+
+    run_pool_chunk_new() computed the allocation size as
+    sizeof(chunk) + capacity * sizeof(FriBidiRun), which can wrap a 32-bit
+    size_t while chunk->capacity still recorded the large value, leading to
+    a heap-buffer-overflow. Reject sizes that don't fit in size_t,
+    and guard
+    the capacity doubling in run_pool_alloc() against signed overflow.
+
+    Fixes #256
+
+ lib/fribidi-run.c | 21 +++++++++++++++++++--
+ 1 file changed, 19 insertions(+), 2 deletions(-)
+
+commit 24f15eee832eafa5d63319b666d50e488668ce31
+Author: Dov Grobgeld <dov.grobgeld@gmail.com>
+Date:   Thu Sep 24 17:49:52 2026 +0300
+
+    bin: fix stack-buffer-overflow in CapRTL/UTF-8 output expansion
+
+    outstring was sized to MAX_STR_LEN but fribidi_unicode_to_charset can
+    expand each character up to 2x for CapRTL or 4x for UTF-8, overflowing
+    the stack buffer on long input. Size it for the worst case plus NUL.
+
+    Fixes #232
+
+ bin/fribidi-main.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 7c5c6f01ba15908a33ed4604eb71d99f13188359
+Author: Jamaika1 <lukaszcz18@wp.pl>
+Date:   Wed Sep 23 08:04:00 2026 +0200
+
+    Add debug logging for reading bracket data file
+
+ gen.tab/gen-brackets-tab.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 4c914a92e94a9fe4f30ae83a1130099841566448
+Author: Jamaika1 <lukaszcz18@wp.pl>
+Date:   Mon Sep 21 13:25:55 2026 +0200
+
+    Deleting duplicate lines
+
+ lib/run.h | 2 --
+ 1 file changed, 2 deletions(-)
+
+commit 1d42f35e26f7ee4cde23a4103ace0f9f4f86a1aa
+Author: Dov Grobgeld <dov.grobgeld@gmail.com>
+Date:   Sun Sep 20 11:39:41 2026 +0300
+
+    bin: don't run help2man on a cross-built binary
+
+    The autotools man page rule executed the freshly built fribidi binary
+    to feed help2man, which fails when that binary targets a different
+    host than the build machine. Skip regeneration (falling back to a
+    pre-shipped man page if present) when cross-compiling, matching the
+    meson build's existing behavior.
+
+ bin/Makefile.am | 14 ++++++++++++++
+ configure.ac    |  2 ++
+ 2 files changed, 16 insertions(+)
+
 commit b93119f5fdc7ea47672cc304c1455ffa6dfe7536
 Author: Dov Grobgeld <dov.grobgeld@gmail.com>
 Date:   Sun Sep 20 08:37:40 2026 +0300
